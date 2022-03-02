@@ -3,7 +3,6 @@
 Kiến thức cơ bản về mạng
 
 - [Chapter1: Internet](#chapter1-internet)
-  - [Interconnecting our Lives](#interconnecting-our-lives)
     - [Truyền thông là gì? - Communication](#truyền-thông-là-gì---communication)
     - [Quality of communication](#quality-of-communication)
     - [Các dịch vụ viễn thông truyền thống](#các-dịch-vụ-viễn-thông-truyền-thống)
@@ -16,11 +15,8 @@ Kiến thức cơ bản về mạng
   - [Types of Network](#types-of-network)
 
 
-## Interconnecting our Lives
 - Internet có từ năm 1995, về VN từ 1997
-- Tốc độ tăng trưởng Internet rất mạnh
 - Internet of Everything: Tất cả mọi thứ đều kết nối với nhau Internet.
-  - Hỗ trợ truyền thông, học, làm việc, giải trí.
 
 ### Truyền thông là gì? - Communication
 Nguyên tắc truyền thông:
