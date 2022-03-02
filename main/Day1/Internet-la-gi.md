@@ -21,12 +21,20 @@ Kiến thức cơ bản về mạng
 ### Truyền thông là gì? - Communication
 Nguyên tắc truyền thông:
 - Xác định được bên gửi và bên nhận
-  - Biết được địa chỉ của bên gửi và bên nhận
+  - Muốn giao tiếp thì phải có người nói người nghe
 - Chấp nhận giao thức truyền thông (face to face, telephone, letter)
+  - Cần phương thức truyền tải: ví dụ khi nói chuyện chúng ta phải có không khí để truyền âm thanh đi
   - Thống nhất được giao thức truyền thông: cáp đồng, cáp quang...
-- Chấp nhận ngôn ngữ và ngữ pháp
+- Thiết lâp quy tắc chung: format,...
+  - Ngôn ngữ và ngữ pháp chung
   - Thống nhất về ngôn ngữ: ví dụ cùng dùng Tiếng Việt
-- Tốc độ và thời gian truyền
+- Kích cơ của thông điệp
+  - Khi chuyển nhà, có cái ngõ rất hẹp, mà rất nhiều lần ta phải chuyển nhiều lần hoặc thuê xe vừa với cái ngõ.
+  - Trong truyền thông trên thiết bị nguồn, thông điệp sẽ được tách ra thành mảnh nhỏ, đảm bảo đc không gian xử lý của các thiết bị nhận, bên nhận sẽ tái cấu trúc lại thành thông điệp ban đầu.
+- Message Timing: 3 nguyên tắc
+  - Access Method: Khi gọi điện không thể 2 bên cùng nói đc, k ai sẽ nghe được bên kia nói gì, nên kẻ nói phải có người nghe=> nó là phương thức quyết định xem thiết bị nào sẽ bắt đầu phiên truyền và gửi trước.
+  - Flow Control: hình dung giống như tốc độ nói, nói với tốc độ nhanh người nghe cũng không kịp xử lý. Trong không gian mạng cũng vậy.
+  - Response Timeout: Chờ lâu quá k trả lời, tbi sẽ gửi lại...
 - Cơ chế xác nhận khi truyền
   - Ví dụ gửi đi bên kia nhận được sẽ trả lời: anh ơi em nhận được rồi.
 
