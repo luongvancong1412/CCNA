@@ -4,7 +4,7 @@ Kiến thức cơ bản về mạng
 
 - [Chapter1: Internet](#chapter1-internet)
     - [Truyền thông là gì? - Communication](#truyền-thông-là-gì---communication)
-    - [Quality of communication](#quality-of-communication)
+    - [Chất lượng truyền thông](#chất-lượng-truyền-thông)
     - [Các dịch vụ viễn thông truyền thống](#các-dịch-vụ-viễn-thông-truyền-thống)
     - [Planning for the Future](#planning-for-the-future)
   - [Thành phần của Network](#thành-phần-của-network)
@@ -21,6 +21,7 @@ Kiến thức cơ bản về mạng
 ### Truyền thông là gì? - Communication
 Nguyên tắc truyền thông:
 - Xác định được bên gửi và bên nhận
+  - Biết được địa chỉ của bên gửi và bên nhận
 - Chấp nhận giao thức truyền thông (face to face, telephone, letter)
   - Thống nhất được giao thức truyền thông: cáp đồng, cáp quang...
 - Chấp nhận ngôn ngữ và ngữ pháp
@@ -29,11 +30,12 @@ Nguyên tắc truyền thông:
 - Cơ chế xác nhận khi truyền
   - Ví dụ gửi đi bên kia nhận được sẽ trả lời: anh ơi em nhận được rồi.
 
-### Quality of communication
+### Chất lượng truyền thông
 
 Yếu tố tác động đến chất lượng:
 1. **Tác động bên ngoài:**
 - Tuyến đường giữa bên gửi và bên nhận
+  - Khi đi từ A-B ta có rất nhiều 
 - Số lần bản tin thay đổi cấu trúc dữ liệu khi truyền
   - Khi đi từ A-B phải trải qua các đoạn đường khác nhau với cấu trúc khác nhau(hay môi trường)
 - Số lần bản tin chuyển hướng khi truyền
