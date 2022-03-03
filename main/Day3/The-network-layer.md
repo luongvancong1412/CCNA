@@ -8,7 +8,7 @@
 - [4. Đặc điểm cơ bản của IP](#4-đặc-điểm-cơ-bản-của-ip)
   - [4.1 Connectionless](#41-connectionless)
   - [4.2 Best Effort](#42-best-effort)
-- [4.3 Media Independent - Không phụ thuộc vào môi trường truyền dẫn](#43-media-independent---không-phụ-thuộc-vào-môi-trường-truyền-dẫn)
+  - [4.3 Media Independent - Không phụ thuộc vào môi trường truyền dẫn](#43-media-independent---không-phụ-thuộc-vào-môi-trường-truyền-dẫn)
 - [Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
 # 1. Tổng quan
@@ -94,7 +94,7 @@ Có thể hiểu là đặc điểm của giao thức IP là nó sẽ tìm cách
 ![](image/Best-effort-IP-protocol.png)
 
 Cho nên người ta miêu tả: **IP là một giao thức lớp mạng không đáng tin cậy, IP không đảm bảo việc tất cả các gói đã gửi sẽ được nhận. Các giao thức khác sẽ quản lý các quá trình để theo dõi các gói tin và đảm bảo quá trình truyền dẫn.**
-# 4.3 Media Independent - Không phụ thuộc vào môi trường truyền dẫn
+## 4.3 Media Independent - Không phụ thuộc vào môi trường truyền dẫn
 
 Có nghĩa là cùng 1 gói tin IP có thể được đẩy qua cái mạng cáp đồng hay cáp quang hay một mạng Wireless
 
