@@ -17,7 +17,8 @@
 
 **IP Header Length:** 
 
-- Độ dài 4 bit
+- Độ dài 4 bit (Tối đa 64 byte)
+- Bình thường 20 byte
 - Xác định độ dài của trường IP Header
 
 **Differentiated Services or DiffServ (DS):**
@@ -116,6 +117,7 @@
 - Destination:
 
 ![](./image/dest.png)
+
 
 
 

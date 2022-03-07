@@ -10,6 +10,7 @@
   - [4.1 Connectionless](#41-connectionless)
   - [4.2 Best Effort](#42-best-effort)
   - [4.3 Media Independent - Không phụ thuộc vào môi trường truyền dẫn](#43-media-independent---không-phụ-thuộc-vào-môi-trường-truyền-dẫn)
+- [5. Định tuyến](#5-định-tuyến)
 - [Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
 # 1. Tổng quan
@@ -110,6 +111,8 @@ Có nghĩa là cùng 1 gói tin IP có thể được đẩy qua cái mạng cá
 
 Trong một số trường hợp, một thiết bị trung gian thường là một bộ định tuyến, phải chia nhỏ gói IPv4 khi chuyển tiếp nó từ phương tiện này sang phương tiện khác bằng MTU nhỏ hơn. Quá trình này được gọi là phân mảnh gói tin, hay phân mảnh. Sự phân mảnh gây ra độ trễ. (Bộ định tuyến không thể phân mảnh gói IPv6).
 
+
+# 5. Định tuyến 
 **Lưu ý:** Những điều cần nhớ
 - Chức năng nhiệm vụ của tầng Network
 - Các giao thức tầng network
