@@ -2,36 +2,76 @@
 
 <h2> Mục lục </h2>
 
-- [Tổng quan](#tổng-quan)
-  - [Khái niệm](#khái-niệm)
-  - [Phân loại định tuyến](#phân-loại-định-tuyến)
-    - [Định tuyến tĩnh - static routing](#định-tuyến-tĩnh---static-routing)
-    - [Định tuyến động](#định-tuyến-động)
-      - [Distance vector](#distance-vector)
-      - [Link state](#link-state)
-      - [Ngoài ra](#ngoài-ra)
-        - [Classfull routing protocol](#classfull-routing-protocol)
-        - [Classless routing protocol](#classless-routing-protocol)
-    - [Các tham số quan trọng](#các-tham-số-quan-trọng)
-  - [Cấu hình định tuyến động - distance vector](#cấu-hình-định-tuyến-động---distance-vector)
-    - [RIP](#rip)
-      - [RIPv1](#ripv1)
-      - [RIPv2](#ripv2)
-    - [OSPF](#ospf)
+- [I. Tổng quan](#i-tổng-quan)
+- [II. Bảng định tuyến](#ii-bảng-định-tuyến)
+- [III. Phân loại định tuyến](#iii-phân-loại-định-tuyến)
+  - [1. Định tuyến tĩnh - static routing](#1-định-tuyến-tĩnh---static-routing)
+  - [2. Định tuyến động](#2-định-tuyến-động)
+    - [2.1. Distance vector](#21-distance-vector)
+    - [2.2. Link state](#22-link-state)
+    - [2.3. Ngoài ra](#23-ngoài-ra)
+      - [a. Classfull routing protocol](#a-classfull-routing-protocol)
+      - [b. Classless routing protocol](#b-classless-routing-protocol)
+    - [2.4. Các tham số quan trọng](#24-các-tham-số-quan-trọng)
+      - [a. Metric](#a-metric)
+      - [b. AD](#b-ad)
+- [Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
-# Tổng quan
-## Khái niệm
-
+# I. Tổng quan
 - Định tuyến là chức năng của router giúp xác định quá trình tìm đường đi cho các gói tin từ nguồn tới đích thông qua hệ thống mạng.
 - Để xác định đường đi cho các gói tin, Router dựa vào:
   - Địa chỉ IP đích (Destination IP)
   - Bảng định tuyến (routing table)
 
-## Phân loại định tuyến
+Trong hình, 2 bộ định tuyến R1 và R2 đang kết nối 3 mạng khác nhau.
+
+![Imgur](https://i.imgur.com/RiWgBCx.png)
+# II. Bảng định tuyến
+- Các Router kiểm kiểm tra địa chỉ IP đích của gói tin đã nhận và đưa ra tuyến đường phù hợp.
+- Để xác định gói tin sẽ được gửi qua đường nào, các router phải sử dụng Bảng định tuyến (Routing table).
+- Bảng định tuyến liệt kê tất cả các mạng từ các tuyến đường đã biết cho router
+- Bảng định tuyến của mỗi router là duy nhất và được lưu trữ trong RAM của thiết bị.
+- Lệnh ở chế độ EXEC được sử dụng để xem bảng định tuyến trên router Cisco:
+```
+R#show ip route
+```
+
+Ví dụ:
+```
+R1# show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+E1 - OSPF external type 1, E2 - OSPF external type 2
+i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+ia - IS-IS inter area, * - candidate default, U - per-user static route
+o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+a - application route
++ - replicated route, % - next hop override, p - overrides from PfR
+Gateway of last resort is 209.165.200.226 to network 0.0.0.0
+S* 0.0.0.0/0 [1/0] via 209.165.200.226, GigabitEthernet0/0/1
+10.0.0.0/24 is subnetted, 1 subnets
+O 10.1.1.0 [110/2] via 209.165.200.226, 00:02:45, GigabitEthernet0/0/1
+192.168.10.0/24 is variably subnetted, 2 subnets, 2 masks
+C 192.168.10.0/24 is directly connected, GigabitEthernet0/0/0
+L 192.168.10.1/32 is directly connected, GigabitEthernet0/0/0
+209.165.200.0/24 is variably subnetted, 2 subnets, 2 masks
+C 209.165.200.224/30 is directly connected, GigabitEthernet0/0/1
+L 209.165.200.225/32 is directly connected, GigabitEthernet0/0/1
+R1#
+```
+
+Ở đầu mỗi mục là 1 mã để xác định loại tuyến đường hoặc cách tuyến đường được học. Các mã phổ biến:
+- L - Địa chỉ IP giao diện cục bộ được kết nối trực tiếp
+- C - Mạng kết nối trực tiếp
+- S - Tuyến đường tĩnh được cấu hình thủ công
+- O - OSPF
+- D - EIGRP
+# III. Phân loại định tuyến
 Có 2 loại định tuyến:
 - Định tuyến tĩnh
 - Định tuyến động
-### Định tuyến tĩnh - static routing
+## 1. Định tuyến tĩnh - static routing
 - Là loại định tuyến mà trong đó router sử dụng các tuyến đường đi tĩnh để vận chuyển dữ liệu đi.
 - Do người quản trị cấu hình thủ công vào router.
 - Cú pháp:
@@ -40,10 +80,10 @@ R(config)#ip route <destination-net> <subnet-mask> <NextHop|Outport>
 ```
 
 Trong đó:
-- destination-network: là địa chỉ mạng cần đi tới
-- subnet-mask: subnet-mask của destination-network
-- next-hop: địa chỉ IP của router kế tiếp kết nối trực tiếp với router đang xét.
-- OutPort: cổng của router đang xét mà packet sẽ đi ra.
+- `destination-network`: là địa chỉ mạng cần đi tới
+- `subnet-mask`: subnet-mask của destination-network
+- `next-hop`: địa chỉ IP của router kế tiếp kết nối trực tiếp với router đang xét.
+- `OutPort`: cổng của router đang xét mà packet sẽ đi ra.
 
 **Default route**
 - Nằm ở cuối bảng định tuyến.
@@ -53,7 +93,7 @@ Ví dụ:
 
 ![Imgur](https://i.imgur.com/K7Kd7Zl.png)
 
-Định tuyến:
+**Câu hình định tuyến tĩnh:**
 - Next Hop:
 ```
 R1(config)#ip route 0.0.0.0 0.0.0.0 203.113.115.1
@@ -63,22 +103,22 @@ R1(config)#ip route 0.0.0.0 0.0.0.0 203.113.115.1
 R1(config)#ip route 0.0.0.0 0.0.0.0 S0/0/0
 ```
 
-### Định tuyến động
+## 2. Định tuyến động
 - Là loại định tuyến mà trong đó router sử dụng các tuyến đường đi động để vận chuyển dữ liệu
 - Các tuyến đường này do các router sử dụng các giao thức định tuyến để trao đổi thông tin định tuyến với nhau.
 - Một số giao thức định tuyến phổ biến:
-  - RIP
-  - OSPF
-  - BGP
+  - RIP (Routing Information Protocol)
+  - OSPF (Open Shortest Path First)
+  - BGP (Border Gateway Protocol)
   - ...
 - Giao thức định tuyến động chia làm 2 loại:
   - Distance-route
   - link-state
 
 
-#### Distance vector
+### 2.1. Distance vector
 ![Imgur](https://i.imgur.com/nSgCJyV.png)
-- Giao thức thuộc loại này: RIP,...
+- Giao thức thuộc loại này: RIP (Routing Information Protocol),...
 - Các router định tuyến:
   - thực hiện gửi định kỳ toàn bộ bảng định tuyến của mình và gửi cho các router láng giềng kết nối trực tiếp với mình.
   - Không biết được đường đi đến đích một cách cụ thể
@@ -89,15 +129,19 @@ R1(config)#ip route 0.0.0.0 0.0.0.0 S0/0/0
 - Mỗi router nhìn hệ thống mạng theo sự chi phối của các router láng giềng.
 - Nhược điểm: Tốn nhiều băng thông (do thực hiện cập nhật thông tin định tuyến theo định kỳ)
 
-#### Link state
+### 2.2. Link state
 ![Imgur](https://i.imgur.com/YbylhGg.png)
 
-- Giao thức thuộc loại này: OSPF, IS-IS
+- Giao thức thuộc loại này: OSPF (Open shortest Path First), IS-IS (Intermediate System to Intermediate System)
 - Các router định tuyến:
   - sẽ trao đổi các LSA (Link state advertisement) với nhau để xây dựng và duy trì CSDL về trạng thái các đường liên kết.
   - Các thông tin trao đổi được gửi dưới dạng Multicast
   - Nó không thực hiện cập nhật định tuyến định kỳ mà chỉ khi có sự thay đổi xảy ra. => Nhanh, tốn ít băng thông.
-  - Hỗ trợ CIDR, VLSM nên là lựa chọn tốt cho các mạng lớn và phức tạp. => Đòi hỏi dung lượng bộ nhớ lớn và khả năng xử lý mạnh của CPU router.
+  - Hỗ trợ CIDR (Classless Inter Domain Routing), VLSM (Variable Length Subnet Masking) nên là lựa chọn tốt cho các mạng lớn và phức tạp. => Đòi hỏi dung lượng bộ nhớ lớn và khả năng xử lý mạnh của CPU router.
+
+> CIDR (Classless Inter-Domain Routing) là 1 phương pháp tóm tắt địa chỉ IP. Format địa chỉ IP CIDR: 192.168.1.0/24
+> VLSM (Variable Length Subnet Masking) là kỹ thuật phân chia không gian địa chỉ IP thành các subnet có kích thước khác nhau.
+
 
 - Để database luôn cập nhật thông tin mới: Trong LSA được đánh thêm chỉ số `sequense`:
   - Được bắt đầu từ giá trị `initial` đến `Max-age`.
@@ -106,144 +150,56 @@ R1(config)#ip route 0.0.0.0 0.0.0.0 S0/0/0
   - Nếu `sequense`=`Max-age`, router sẽ flood (Ngập lụt) LSA ra cho tất cả ác router còn lại, sau đó set về `initial`.
 
 
-#### Ngoài ra
+### 2.3. Ngoài ra
 Còn được phân thành 2 loại:
 - Classfull routing protocol
 - Classless routing protocol
 
-##### Classfull routing protocol
+#### a. Classfull routing protocol
 - Trong các gói tin cập nhật (routing update) nhóm classfull không quảng bá: subnet-mask cùng với địa chỉ đích. Router phải lấy giá trị network-mask mặc định có cùng với địa chỉ lớp mạng của IP đích.
 - Nếu  địa chỉ đích:
   - Kết nối trực tiếp với route, network-mask được lấy trên interface kết nối đến mạng đó.
   - Không nối trực tiếp (disconnected), sẽ lấy địa chỉ subnetmask default của địa chỉ đích.
 
-##### Classless routing protocol
+#### b. Classless routing protocol
 - Trong các gói tin cập nhật định tuyến, nhóm classless sẽ quảng bá subnet-mask cùng với địa chỉ đích.
 
-### Các tham số quan trọng
-- Metric:
-  - sử dụng để chọn đường đi tốt nhất cho việc định tuyến.
-  - All protocol cũng phải dùng để tính toán đường đi đến mạng đích.
-  - Khi có nhiều đường đi đến đích, đường có `Metric` thấp sẽ được đưa vào bảng định tuyến.
-  - Mỗi giao thức định tuyến có 1 kiểu `metric` khác nhau.
+### 2.4. Các tham số quan trọng
 
-- AD:
-  - Administrative Distance
-  - Là giá trị quy ước dùng để chỉ độ tin cậy của giao thức định tuyến.
-  - Giao thức có AD nhỏ hơn được xem là đáng tin cậy hơn.
-  - Giao thức định tuyến nào có AD nhỏ nhất sẽ được lựa chọn và đưa vao bảng định tuyến.
+#### a. Metric
+- sử dụng để chọn đường đi tốt nhất cho việc định tuyến.
+- All protocol cũng phải dùng để tính toán đường đi đến mạng đích.
+- Khi có nhiều đường đi đến đích, đường có `Metric` thấp sẽ được đưa vào bảng định tuyến.
+- Mỗi giao thức định tuyến có 1 kiểu `metric` khác nhau.
 
-## Cấu hình định tuyến động - distance vector
+#### b. AD
+- Administrative Distance
+- Là giá trị quy ước dùng để chỉ độ tin cậy của giao thức định tuyến.
+- Giao thức có AD nhỏ hơn được xem là đáng tin cậy hơn.
+- Giao thức định tuyến nào có AD nhỏ nhất sẽ được lựa chọn và đưa vao bảng định tuyến.
 
-### RIP
-- Là 1 giao thức định tuyến theo kiểu distance vector
-- Sử dụng `Hop count` (đếm số router) làm `metric` cho việc chọn đường (có nhiều đường cùng đến 1 đích thì chọn đường có `hop count` ít nhất).
-- Nếu `hop count > 15` thì packet bị loại bỏ
-- thời gian update: 30s (mặc định)
-- AD : 120
-- Có 2 phiên bản: RIPv1 và RIPv2
+Bảng mức độ tin cậy được dùng trong router Cisco:
+|Protocol|AD|
+|---|---|
+Nối trực tiếp|0|
+Static route|1
+EIGRP summary route|5
+External BGP|20
+Internal EIGRP |90
+IGRP|100
+OSPF|110
+IS-IS|115
+RIP|120
+EGP|140
+ODR|160
+External EIGRP|170
+Internal BGP|200
+Không xác định|255|
 
-#### RIPv1
-- Là 1 giao thức định tuyến theo kiểu **distance-vector** và theo lớp **classfull routing protocol**.
-- `Metric` là `hop-count`.
-- Chu kỳ cập nhật: 30s
-- `Hop-count` max : 15
-- Không hỗ trợ:
-  - VLSM
-  - mạng không liên tục (discontigous network)
 
-Câu lệnh cấu hình:
-```
-Router(config)#router rip
-Router(config-router)#network network_number
-```
+# Tài liệu tham khảo
 
-#### RIPv2
-- Là phiên bản cải tiến của RIPv1
-- Là giao thức định tuyến dạng classless (có gửi thông tin subnet-mask qua cập nhật định tuyến)
-- Hỗ trợ:
-  - VLSM
-  - Chứng thực trong các routing update
-- Cập nhật định tuyến dạng Multicast, sử dụng địa chỉ lớp D 224.0.0.9
-
-- `Metric`: hop-count
-
-Cấu hình RIPv2:
-```
-R(config)#router rip
-R(config-router)#version 2
-R(config-router)#network network-number
-```
-Trong đó: `network-number` là địa chỉ mạng láng giềng
-
-**Bảng so sánh**
-|Đặc điểm|RIPv1|RIPv2|
-|---|---|---|
-Loại định tuyến|Classfull|Classless|
-Hỗ trợ VLSM và mạng không liên tục|không|có|
-gửi kèm subnet-mask trong bản tin routing update|không |có|
-Quảng bá thông tin định tuyến |Broadcast|Multicast|
-Hỗ trợ chứng thực|không|có|
-Định nghĩa trong RFC|RFC 1058|RFC 1721, 1722, 2453|
-
-- Mạng không liên tục (discontiguous network) là mạng mà trong đó các mạng con (subnet) của cùng một mạng lớn (major network - mạng theo đúng lớp) bị ngăn cách bởi "major-network" khác.
-
-![Imgur](https://i.imgur.com/frARUQO.png)
-
-Trong hình: 2 mạng con lớp B bị ngăn cách bởi mạng con lớp C.
-
-**Chứng thực trong RIPv2**
-- Chứng thực trong định tuyến là cách thức bảo mật trong việc trao đổi thông tin định tuyến giữa các router.
-- Các router phải vượt qua quá trình chứng thực này trước khi trao đổi định tuyến được thực hiện.
-- RIPv2 hỗ trợ 2 kiểu định tuyến:
-  - `Plain text`
-  - `MD5`
-
-- Chứng thực `Plain text` (hay Clear text)
-  - các router được cấu hình 1 khoá (password) và trao đổi chúng để so khớp.
-  - password được gửi dưới dạng không mã hoá.
-  - Cấu hình:
-    - Bước 1: Tạo bộ khoá
-    ```
-    R(config)#key chain <name>
-    ```
-    - Bước 2: Tạo các khoá
-    ```
-    R(config-keychain)#key <key-id>
-    R(config-keychain)#key-string <password>
-    ```
-    - Bước 3: Áp đặt vào các cổng gửi chứng thực
-    ```
-    R(config)#interface <interface>
-    R(config-if)#ip rip authentication key-chain <name>
-    ```
-- Chứng thực dạng `MD5`:
-  - Password được mã hoá khi gửi đi (an toàn hơn).
-  - Cấu hình tương tự `Plain text`
-  - Bước 3 thêm dòng lệnh:
-  ```
-  R(config-if)#ip rip authentication mode md5
-  ```
-
-**Các lệnh kiểm tra cấu hìnu**
-```
-R#debug ip rip
-R#show ip route
-```
-
-### OSPF
-- Open Shortest Path First
-- Định tuyến dạng `link-state`
-- Sử dụng thuật toán Dijkstra `Shortest Path Firs(SPF)` để xây dựng bảng định tuyến.
-
-- Ưu điểm:
-  - Hội tụ nhanh
-  - hỗ trợ được mạng có kích thước lớn
-  - Không xảy ra routing loop.
-  - Định tuyến dạng classless nên hỗ trợ VLSM và mạng không liên tục.
-  - Sử dụng địa chỉ Multicast 224.0.0.5 và 224.0.0.6 (DR và BDR router) để gửi các thông điệp `hello` và `update`.
-
-- Sử dụng area để giảm yêu cầu về CPU, memory của OSPF router và lưu lượng định tuyến.
-- Hỗ trợ chứng thực `Plain text` và `MD5`.
-- `Metric` : cost
-  - Co
+1. https://drive.google.com/file/d/1-1vF6vYwSv9J-SrHjqtXsllXJqjvknTe/view?usp=sharing
+2. https://vi.wikipedia.org/wiki/%C4%90%E1%BB%8Bnh_tuy%E1%BA%BFn
+3. https://ccna-200-301.online/introduction-to-routing/
+4. https://geek-university.com/routing-table-explained/
