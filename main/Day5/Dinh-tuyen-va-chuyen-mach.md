@@ -3,7 +3,7 @@
 <h2> Mục lục </h2>
 
 - [I. Tổng quan](#i-tổng-quan)
-- [II. Bảng định tuyến](#ii-bảng-định-tuyến)
+- [II. Cấu trúc bảng định tuyến](#ii-cấu-trúc-bảng-định-tuyến)
 - [III. Phân loại định tuyến](#iii-phân-loại-định-tuyến)
   - [1. Định tuyến tĩnh - static routing](#1-định-tuyến-tĩnh---static-routing)
   - [2. Định tuyến động](#2-định-tuyến-động)
@@ -26,7 +26,7 @@
 Trong hình, 2 bộ định tuyến R1 và R2 đang kết nối 3 mạng khác nhau.
 
 ![Imgur](https://i.imgur.com/RiWgBCx.png)
-# II. Bảng định tuyến
+# II. Cấu trúc bảng định tuyến
 - Các Router kiểm kiểm tra địa chỉ IP đích của gói tin đã nhận và đưa ra tuyến đường phù hợp.
 - Để xác định gói tin sẽ được gửi qua đường nào, các router phải sử dụng Bảng định tuyến (Routing table).
 - Bảng định tuyến liệt kê tất cả các mạng từ các tuyến đường đã biết cho router
