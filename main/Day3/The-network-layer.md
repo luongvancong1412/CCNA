@@ -124,3 +124,4 @@ Bài tiếp theo là: [Tìm hiểu IPv4](./../Day4/IPv4.md)
 
 1. https://ccna-200-301.online/the-network-layer/
 2. https://users.soict.hust.edu.vn/tungbt/it3080/Chap4.pdf
+3. https://eclass.teicrete.gr/modules/document/file.php/TP326/%CE%98%CE%B5%CF%89%CF%81%CE%AF%CE%B1%20(Lectures)/Computer_Networking_A_Top-Down_Approach.pdf
