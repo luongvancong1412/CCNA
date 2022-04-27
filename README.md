@@ -23,5 +23,3 @@ gồm:
   - Quản trị dữ liệu (database):Oracle, MySQL
   - Cloud (AWS...)
 - Security: Nắm all.
-
-# Tài liệu này về: CCNA Routing and Switching
